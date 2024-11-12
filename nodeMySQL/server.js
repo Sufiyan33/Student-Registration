@@ -70,3 +70,23 @@ server.get("/api/student/:id", (req, res) =>{
         }
     });
 });
+
+// Update record by id.
+server.put("/api/student/update/:id", (req, res) =>{
+    let sql = "UPDATE student SET name='" + 
+    req.body.name + 
+    "', course='" +
+    req.body.course +
+    "', fees='" + 
+    req.body.fees + 
+    "' WHERE id=" +
+    req.params.id;
+
+    db.query(sql, (error, result) =>{
+        if(error){
+            res.send({status: false, message: "Data updation failed...", error});
+        }else{
+            res.send({status: true, message: "Record updated successfully...", data: result});
+        }
+    });
+});
