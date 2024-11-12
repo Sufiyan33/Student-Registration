@@ -19,4 +19,10 @@ db.connect(function (error) {
     }else{
         console.log("DB Connected successfully...")
     }
-})
+});
+
+// Now set port for listening
+server.listen(8085, function(error){
+    if(error) console.log("Error...", error);
+    else console.log("Started on port: 8085")
+});
