@@ -90,3 +90,15 @@ server.put("/api/student/update/:id", (req, res) =>{
         }
     });
 });
+
+// Deleting record by id.
+server.delete("/api/student/delete/:id", (req, res) =>{
+    let sql = "DELETE FROM student WHERE id=" + req.params.id + "";
+    db.query(sql, (error) =>{
+        if(error){
+            res.send({status: false, message: "Deletion has been failed...", error});
+        }else{
+            res.send({status: true, message: "Reocrd has been deleted..."})
+        }
+    });
+})
