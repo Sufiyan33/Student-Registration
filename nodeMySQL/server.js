@@ -44,7 +44,7 @@ server.post("/api/student/add", (req, res) =>{
     });
 });
 
-// fetch data.
+// view all data.
 server.get("/api/student", (req, res) =>{
     let sql = "SELECT * FROM student";
     db.query(sql, function(error, result){
@@ -52,6 +52,21 @@ server.get("/api/student", (req, res) =>{
             console.log("Error connecting to DB...", error);
         }else{
             res.send({status : true, data: result});
+        }
+    });
+});
+
+// search record by id.
+server.get("/api/student/:id", (req, res) =>{
+    var id = req.params.id;
+    var sql = "SELECT * FROM student WHERE id=" + id;
+    db.query(sql, function(error, result){
+        if(error){
+            console.log("Error occured connecting DB...", error);
+        }else{
+            res.send({
+                status: true, data: result
+            });
         }
     });
 });
