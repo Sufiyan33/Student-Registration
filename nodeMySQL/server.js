@@ -43,3 +43,15 @@ server.post("/api/student/add", (req, res) =>{
         }
     });
 });
+
+// fetch data.
+server.get("/api/student", (req, res) =>{
+    let sql = "SELECT * FROM student";
+    db.query(sql, function(error, result){
+        if(error){
+            console.log("Error connecting to DB...", error);
+        }else{
+            res.send({status : true, data: result});
+        }
+    });
+});
