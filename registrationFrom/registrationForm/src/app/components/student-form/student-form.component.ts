@@ -29,4 +29,16 @@ export class StudentFormComponent {
       this.studentList = result.data;
     })
   }
+
+  onSave(){
+    if(this.currentStudentId = ''){
+      this.http.post(Constants.API_DETAILS.POST_API, this.studentObj).subscribe((result: any) =>{
+        console.log(result.data);
+        alert('Student registered successfully...');
+        this.getAllStudent();
+      })
+    }else{
+
+    }
+  }
 }
