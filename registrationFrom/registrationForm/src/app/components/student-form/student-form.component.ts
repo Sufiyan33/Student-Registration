@@ -25,7 +25,7 @@ export class StudentFormComponent implements OnInit{
 
   constructor(private fb:FormBuilder, private studentService: StudentserviceService){
     this.studentForm = this.fb.group({
-      name: [''],
+      name: [''], // apply here validation
       course: [''],
       fees: ['']
     });
