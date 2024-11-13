@@ -60,7 +60,7 @@ export class StudentFormComponent implements OnInit{
     );
     }else{
       //create new student if not editMode true.
-      this.studentService.createStudent(this.studentObj).subscribe(() =>{
+      this.studentService.createStudent(student).subscribe(() =>{
         this.loadStudednts(); //Reload student after saving.
         this.studentForm.reset();
        },

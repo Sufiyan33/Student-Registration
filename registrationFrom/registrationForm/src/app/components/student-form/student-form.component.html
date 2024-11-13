@@ -63,7 +63,7 @@
                             <button type="button" class="btn btn-secondary">Reset</button>
                         </div>
                         <div class="col-6 text-center">
-                            <button type="button" class="btn btn-primary" (click)="saveStudents()">Save</button>
+                            <button type="button" class="btn btn-primary" (click)="saveStudents()">{{editMode ? 'Update' : 'Save'}}</button>
                         </div>
                     </div>
                 </form>

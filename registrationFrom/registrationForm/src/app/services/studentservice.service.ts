@@ -23,8 +23,8 @@ export class StudentserviceService {
     .pipe(map(response => response.data));
   }
 
-  updateStudent(id: number, student: StudentModel): Observable<StudentModel>{
-    return this.http.put<StudentModel>(`${this.apiUrl}/${student.id}`, student);
+  updateStudent(id: number, student: StudentModel): Observable<any>{
+    return this.http.put(`${this.apiUrl}/${id}`, student);
   }
 
   deleteStudent(id: number): Observable<void>{
