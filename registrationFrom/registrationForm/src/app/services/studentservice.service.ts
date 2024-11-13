@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StudentModel } from '../model/Student';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,8 @@ export class StudentserviceService {
   }
 
   getStudents(): Observable<StudentModel[]>{
-    return this.http.get<StudentModel[]>(this.getApi);
+    return this.http.get<{status: boolean, data: StudentModel[]}>(this.getApi)
+    .pipe(map(response => response.data));
   }
 
   updateStudent(student: StudentModel): Observable<StudentModel>{

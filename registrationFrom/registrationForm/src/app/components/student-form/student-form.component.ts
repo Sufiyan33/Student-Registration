@@ -39,8 +39,12 @@ export class StudentFormComponent implements OnInit{
   loadStudednts(): void{
     this.studentService.getStudents().subscribe(data => {
       console.log('Data coming from backend: ', data);
-      this.studentList = Array.isArray(data) ? data : [];
-    });
+      this.studentList = data;
+    },
+    error =>{
+      console.error('Error fetching students', error);
+    }
+  );
   }
 
   saveStudents():void {
