@@ -46,12 +46,27 @@ export class StudentFormComponent implements OnInit{
   );
   }
 
+  // Save or update data.
   saveStudents():void {
-     this.studentObj = this.studentForm.value;
-     this.studentService.createStudent(this.studentObj).subscribe(() =>{
-      this.loadStudednts(); //Reload student after saving.
-      this.studentForm.reset();
-     });
+    const student: StudentModel = this.studentForm.value;
+    if(this.editMode && this.currentStudentId){
+      // update the student if editMode is true.
+      this.studentService.updateStudent(this.currentStudentId, student).subscribe(() =>{
+        this.loadStudednts(); // Reload the student list after updating
+        this.studentForm.reset(); // Reset form.
+        this.editMode = false;this.currentStudentId = null;
+      },
+      error => console.error('Error updating student:', error)
+    );
+    }else{
+      //create new student if not editMode true.
+      this.studentService.createStudent(this.studentObj).subscribe(() =>{
+        this.loadStudednts(); //Reload student after saving.
+        this.studentForm.reset();
+       },
+       error => console.error('Error saving student:', error)
+      );
+    }
   }
 
   deleteStudent(id: number): void{
