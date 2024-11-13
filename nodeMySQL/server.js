@@ -80,7 +80,7 @@ server.get("/api/student/:id", (req, res) =>{
 });
 
 // Update record by id.
-server.put("/api/student/update/:id", (req, res) =>{
+server.put("/api/student/:id", (req, res) =>{
     let sql = "UPDATE student SET name='" + 
     req.body.name + 
     "', course='" +
@@ -100,7 +100,7 @@ server.put("/api/student/update/:id", (req, res) =>{
 });
 
 // Deleting record by id.
-server.delete("/api/student/delete/:id", (req, res) =>{
+server.delete("/api/student/:id", (req, res) =>{
     let sql = "DELETE FROM student WHERE id=" + req.params.id + "";
     db.query(sql, (error) =>{
         if(error){
