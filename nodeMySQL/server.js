@@ -36,7 +36,7 @@ server.listen(8085, function(error){
 });
 
 // Post method
-server.post("/api/student/add", (req, res) =>{
+server.post("/api/student", (req, res) =>{
     let details = {
         name: req.body.name,
         course: req.body.course,
