@@ -1,10 +1,11 @@
 export class StudentModel  {
-    name: number;
+    id?: number;
+    name: string;
     course: string;
     fees: number;
 
     constructor(){
-        this.name = 0;
+        this.name = '';
         this.course = '';
         this.fees = 0;
     }
