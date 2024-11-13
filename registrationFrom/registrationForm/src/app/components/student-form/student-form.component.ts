@@ -19,10 +19,9 @@ export class StudentFormComponent implements OnInit{
   studentList: StudentModel [] =[];
 
   studentForm: FormGroup;
-
-  isResultLoaded = false;
-  isUpdatedFormActive = false;
-  currentStudentId = "";
+  //Add an editMode flag to track whether the form is in "edit" mode or not.
+  editMode: boolean = false;
+  currentStudentId: number | null = null ; // To store the ID of the student being edited
 
   constructor(private fb:FormBuilder, private studentService: StudentserviceService){
     this.studentForm = this.fb.group({
@@ -57,5 +56,16 @@ export class StudentFormComponent implements OnInit{
 
   deleteStudent(id: number): void{
     this.studentService.deleteStudent(id).subscribe(() => this.loadStudednts());
+  }
+
+  onEdit(student: StudentModel): void{
+    this.editMode =  true; // set editMode flag true.
+    this.currentStudentId = student.id; // Store the ID of the student being edited
+    // now populate select student in form.
+    this.studentForm.patchValue({
+      name: student.name,
+      course: student.course,
+      fees: student.fees
+    });
   }
 }
