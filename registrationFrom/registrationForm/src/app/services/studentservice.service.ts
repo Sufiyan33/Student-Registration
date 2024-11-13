@@ -23,7 +23,7 @@ export class StudentserviceService {
     .pipe(map(response => response.data));
   }
 
-  updateStudent(student: StudentModel): Observable<StudentModel>{
+  updateStudent(id: number, student: StudentModel): Observable<StudentModel>{
     return this.http.put<StudentModel>(`${this.apiUrl}/${student.id}`, student);
   }
 
