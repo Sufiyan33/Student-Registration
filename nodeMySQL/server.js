@@ -2,6 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const server = express();
 const mysql = require("mysql2");
+const cors = require('cors'); //import cors module
+
+/*Enable CORS for all routes, 
+    if you want you can restric only for your request like below:
+*/
+server.use(cors({
+    origin: 'http://localhost:4200'
+}));
 server.use(bodyParser.json());
 
 //Db connection
