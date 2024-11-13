@@ -1,44 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StudentModel } from '../../model/Student';
 import { HttpClient } from '@angular/common/http';
 import { Constants } from '../../const/Constant';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { StudentserviceService } from '../../services/studentservice.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-student-form',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './student-form.component.html',
   styleUrl: './student-form.component.css'
 })
-export class StudentFormComponent {
+export class StudentFormComponent implements OnInit{
 
   studentObj: StudentModel = new StudentModel();
   studentList: StudentModel [] =[];
+
+  studentForm: FormGroup;
 
   isResultLoaded = false;
   isUpdatedFormActive = false;
   currentStudentId = "";
 
-  constructor(private http:HttpClient){}
-
-  // Fetching all student while calling backeng api...
-  getAllStudent(){
-    this.http.get(Constants.API_DETAILS.GET_API_ALL).subscribe((result:any) =>{
-      this.isResultLoaded = true;
-      console.log(result.data);
-      this.studentList = result.data;
-    })
+  constructor(private fb:FormBuilder, private studentService: StudentserviceService){
+    this.studentForm = this.fb.group({
+      name: [''],
+      course: [''],
+      fees: ['']
+    });
   }
 
-  onSave(){
-    if(this.currentStudentId = ''){
-      this.http.post(Constants.API_DETAILS.POST_API, this.studentObj).subscribe((result: any) =>{
-        console.log(result.data);
-        alert('Student registered successfully...');
-        this.getAllStudent();
-      })
-    }else{
+  ngOnInit(): void {
+    this.loadStudednts();
+  }
 
-    }
+  loadStudednts(): void{
+    this.studentService.getStudents().subscribe(data => this.studentList = data);
+  }
+
+  saveStudents():void {
+     this.studentObj = this.studentForm.value;
+     this.studentService.createStudent(this.studentObj).subscribe(() =>{
+      this.loadStudednts(); //Reload student after saving.
+      this.studentForm.reset();
+     });
+  }
+
+  deleteStudent(id: number): void{
+    this.studentService.deleteStudent(id).subscribe(() => this.loadStudednts());
   }
 }
