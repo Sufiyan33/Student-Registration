@@ -82,6 +82,6 @@ export class StudentFormComponent implements OnInit{
   }
 
   onReset(){
-
+    this.studentForm.reset();
   }
 }
