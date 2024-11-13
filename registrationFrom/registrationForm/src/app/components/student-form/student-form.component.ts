@@ -37,7 +37,10 @@ export class StudentFormComponent implements OnInit{
   }
 
   loadStudednts(): void{
-    this.studentService.getStudents().subscribe(data => this.studentList = data);
+    this.studentService.getStudents().subscribe(data => {
+      console.log('Data coming from backend: ', data);
+      this.studentList = Array.isArray(data) ? data : [];
+    });
   }
 
   saveStudents():void {

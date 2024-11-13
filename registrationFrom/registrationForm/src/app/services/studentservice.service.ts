@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class StudentserviceService {
   private postApi = 'http://localhost:8085/api/student/add';
-  private getApi = 'http://localhost:8085/api/student/';
+  private getApi = 'http://localhost:8085/api/student';
   private putApi = 'http://localhost:8085/api/student/update/:id';
   private deleteApi = 'http://localhost:8085/api/student/delete:id';
 
