@@ -8,9 +8,6 @@ import { map, Observable } from 'rxjs';
 })
 export class StudentserviceService {
   private apiUrl = 'http://localhost:8085/api/student';
-  private getApi = 'http://localhost:8085/api/student';
-  private putApi = 'http://localhost:8085/api/student/update/:id';
-  private deleteApi = 'http://localhost:8085/api/student/delete/:id';
 
   constructor(private http: HttpClient) { }
 

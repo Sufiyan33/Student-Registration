@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentModel } from '../../model/Student';
-import { HttpClient } from '@angular/common/http';
-import { Constants } from '../../const/Constant';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { StudentserviceService } from '../../services/studentservice.service';
 import { CommonModule } from '@angular/common';
 
@@ -15,7 +13,6 @@ import { CommonModule } from '@angular/common';
 })
 export class StudentFormComponent implements OnInit{
 
-  studentObj: StudentModel = new StudentModel();
   studentList: StudentModel [] =[];
 
   studentForm: FormGroup;
@@ -82,5 +79,9 @@ export class StudentFormComponent implements OnInit{
       course: student.course,
       fees: student.fees
     });
+  }
+
+  onReset(){
+
   }
 }
